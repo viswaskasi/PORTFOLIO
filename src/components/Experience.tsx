@@ -104,7 +104,7 @@ export default function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.6 }}
           className="mb-20 text-left"
         >
@@ -116,7 +116,7 @@ export default function Experience() {
             My <span className="text-gradient-purple font-extrabold" style={{ '--color-accent': '#FF003C' } as React.CSSProperties}>Certifications</span>
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-[#FF003C] to-[#FF3E6C] rounded-full mt-4"></div>
-          <p className="mt-4 text-zinc-500 max-w-2xl font-light text-base md:text-lg">
+          <p className="mt-4 text-zinc-500 max-w-2xl font-normal text-base md:text-lg">
             A comprehensive look at my professional credentials, published research papers, and technical mastery certifications.
           </p>
         </motion.div>
@@ -169,7 +169,7 @@ export default function Experience() {
                         opacity: 1, 
                         x: 0 
                       }}
-                      viewport={{ once: true, margin: "-80px" }}
+                      viewport={{ once: true, margin: "-20px" }}
                       transition={{ type: "spring", stiffness: 60, damping: 15 }}
                       className="p-6 flowing-border-card card-shimmer-trail"
                     >
@@ -210,7 +210,7 @@ export default function Experience() {
                         </span>
                       </div>
 
-                      <p className="text-xs text-zinc-400 font-light leading-relaxed mb-4 text-left">
+                      <p className="text-xs text-zinc-400 font-normal leading-relaxed mb-4 text-left">
                         {item.description}
                       </p>
 
@@ -226,7 +226,7 @@ export default function Experience() {
                           <motion.li 
                             key={idx} 
                             variants={itemVariants}
-                            className="flex items-start gap-2 text-xs text-zinc-400 font-light leading-relaxed group/bullet"
+                            className="flex items-start gap-2 text-xs text-zinc-400 font-normal leading-relaxed group/bullet"
                           >
                             <CheckCircle size={12} className="mt-0.5 shrink-0" style={{ color: item.color }} />
                             <span>

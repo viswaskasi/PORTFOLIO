@@ -83,7 +83,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
@@ -95,7 +95,7 @@ export default function Contact() {
             Get In <span className="text-gradient-purple font-extrabold" style={{ '--color-accent': '#FF003C' } as React.CSSProperties}>Touch</span>
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-[#FF003C] to-[#FF3E6C] rounded-full mt-4"></div>
-          <p className="mt-4 text-zinc-500 max-w-2xl font-light text-base md:text-lg">
+          <p className="mt-4 text-zinc-500 max-w-2xl font-normal text-base md:text-lg">
             Have a project or opportunity in mind? Complete the secure connection sequence below.
           </p>
         </motion.div>
@@ -107,7 +107,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             transition={{ type: "spring", stiffness: 70, damping: 15 }}
             className="space-y-6 text-left"
           >
@@ -219,7 +219,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             transition={{ type: "spring", stiffness: 70, damping: 15 }}
           >
             <form
@@ -297,7 +297,7 @@ export default function Contact() {
                     <AlertCircle size={14} className="shrink-0" />
                     <span>Contact Form Setup Required</span>
                   </div>
-                  <p className="text-zinc-400 font-light leading-relaxed">
+                  <p className="text-zinc-400 font-normal leading-relaxed">
                     To receive visitors' messages directly in your email inbox, please follow this setup:
                   </p>
                   <ol className="list-decimal list-inside space-y-1 text-zinc-300 font-mono text-[9px] bg-black/40 p-2.5 rounded-xl border border-white/5 pl-3">

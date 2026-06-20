@@ -75,7 +75,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       ref={cardRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
@@ -121,7 +121,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
           <h3 className="text-xl font-bold font-display text-white mb-2 tracking-tight transition-colors" style={{ color: hovered ? '#FF003C' : '#ffffff' }}>
             {project.title}
           </h3>
-          <p className="text-zinc-400 font-light text-xs md:text-sm leading-relaxed mb-6">
+          <p className="text-zinc-400 font-normal text-xs md:text-sm leading-relaxed mb-6">
             {project.description}
           </p>
         </div>
@@ -169,7 +169,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
@@ -181,7 +181,7 @@ export default function Projects() {
             Featured <span className="text-gradient-purple font-extrabold" style={{ '--color-accent': '#FF003C' } as React.CSSProperties}>Projects</span>
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-[#FF003C] to-[#FF3E6C] rounded-full mt-4"></div>
-          <p className="mt-4 text-zinc-500 max-w-2xl font-light text-base md:text-lg">
+          <p className="mt-4 text-zinc-500 max-w-2xl font-normal text-base md:text-lg">
             A premium collection of agentic frameworks, computer vision algorithms, and automated deep learning pipelines of equal dimensions.
           </p>
         </motion.div>

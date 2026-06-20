@@ -368,7 +368,7 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
@@ -380,7 +380,7 @@ export default function Skills() {
             My Tech <span className="text-gradient-purple font-extrabold" style={{ '--color-accent': '#FF003C' } as React.CSSProperties}>Engine</span>
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-[#FF003C] to-[#FF3E6C] rounded-full mt-4"></div>
-          <p className="mt-4 text-zinc-500 max-w-2xl font-light text-base md:text-lg">
+          <p className="mt-4 text-zinc-500 max-w-2xl font-normal text-base md:text-lg">
             Interact with the holographic 3D rotating engine. Hover cards to scan files, or hold down on the reactor to rotate it manually.
           </p>
         </motion.div>
@@ -424,7 +424,7 @@ export default function Skills() {
                 <h3 className="text-2xl font-extrabold font-display text-white tracking-tight">
                   {activeSkill.name}
                 </h3>
-                <p className="text-sm text-zinc-400 font-light leading-relaxed">
+                <p className="text-sm text-zinc-400 font-normal leading-relaxed">
                   {activeSkill.desc}
                 </p>
               </div>
@@ -607,7 +607,7 @@ export default function Skills() {
                     <motion.li
                       key={idx}
                       variants={listItemVariants}
-                      className="flex items-center gap-2.5 text-xs text-zinc-400 font-light group/item transition-colors duration-300 hover:text-white"
+                      className="flex items-center gap-2.5 text-xs text-zinc-400 font-normal group/item transition-colors duration-300 hover:text-white"
                     >
                       <Check size={12} className="shrink-0 transition-transform duration-300 group-hover/item:scale-125" style={{ color: group.color }} />
                       <span className="font-sans font-medium text-zinc-400 group-hover/item:text-white transition-colors">

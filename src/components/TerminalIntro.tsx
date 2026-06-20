@@ -144,7 +144,7 @@ export default function TerminalIntro() {
             className={`whitespace-pre-line leading-relaxed ${
               line.type === 'system' ? 'text-[#FF3E6C]/90 font-semibold' :
               line.type === 'input' ? 'text-white' :
-              line.type === 'error' ? 'text-red-400' : 'text-zinc-300 font-light'
+              line.type === 'error' ? 'text-red-400' : 'text-zinc-300 font-normal'
             }`}
           >
             {line.text}

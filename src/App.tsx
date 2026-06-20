@@ -38,24 +38,27 @@ function App() {
 
     setMounted(true);
 
-    // Initialize Lenis smooth scroll on all devices (with touch support enabled)
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      syncTouch: true,
-      touchMultiplier: 1.5,
-    });
-    lenisRef.current = lenis;
+    // Initialize Lenis smooth scroll ONLY on desktop (non-touch devices)
+    // Mobile browsers have native smooth scrolling — Lenis hijacks touch events and causes sticking
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    let rafId: number | null = null;
 
-    lenis.on('scroll', ScrollTrigger.update);
+    if (!isTouchDevice) {
+      const lenis = new Lenis({
+        duration: 0.9,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+      lenisRef.current = lenis;
 
-    // Native requestAnimationFrame loop for ultra-smooth scrolling at screen refresh rate
-    let rafId: number;
-    const raf = (time: number) => {
-      lenis.raf(time);
+      lenis.on('scroll', ScrollTrigger.update);
+
+      const raf = (time: number) => {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      };
       rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
+    }
 
     // ─── Custom Cursor Mouse Event Handler ───
     const handleMouseMove = (e: MouseEvent) => {
@@ -100,7 +103,7 @@ function App() {
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        { threshold: 0.05, rootMargin: '0px 0px -10px 0px' }
       );
 
       const targets = document.querySelectorAll('.reveal-on-scroll');
@@ -131,9 +134,9 @@ function App() {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScrollProgress);
       revealCleanup();
-      cancelAnimationFrame(rafId);
-      if (lenis) {
-        lenis.destroy();
+      if (rafId) cancelAnimationFrame(rafId);
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
       }
     };
   }, []);
@@ -167,7 +170,7 @@ function App() {
       {/* ── MAIN PORTFOLIO CONTENT ── */}
       <div className="relative z-10 lg:pl-64 flex flex-col min-h-screen">
         <div className="flex-1 w-full max-w-6xl mx-auto px-4 md:px-8 py-10 lg:py-16">
-          <main className="w-full space-y-24">
+          <main className="w-full space-y-12 md:space-y-20">
             
             <div className="reveal-on-scroll">
               <Hero />

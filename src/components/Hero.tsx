@@ -100,7 +100,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-zinc-400 text-sm md:text-base mb-10 max-w-xl font-light leading-relaxed"
+            className="text-zinc-400 text-sm md:text-base mb-10 max-w-xl font-normal leading-relaxed"
           >
             I am a results-driven Full Stack MERN Developer specializing in building highly scalable, secure, and production-ready web architectures from the ground up. By combining robust database designs, Express services, and Node backends with polished, high-performance React user interfaces, I deliver complete end-to-end solutions. My focus is merging flawless technical engineering with premium visual designs to craft immersive and intuitive digital experiences.
           </motion.p>

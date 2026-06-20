@@ -216,7 +216,7 @@ function EducationCard({ edu }: { edu: EduItem }) {
                 <h5 className="text-[10px] uppercase font-mono tracking-widest text-zinc-500 font-bold">Key Focus & Milestones</h5>
                 <ul className="space-y-2">
                   {edu.highlights.map((highlight, hIdx) => (
-                    <li key={hIdx} className="flex items-start gap-2 text-zinc-400 text-xs md:text-sm leading-relaxed font-light">
+                    <li key={hIdx} className="flex items-start gap-2 text-zinc-400 text-xs md:text-sm leading-relaxed font-normal">
                       <span className="text-[#FF003C] mt-1 shrink-0 font-mono">▸</span>
                       <span>{highlight}</span>
                     </li>
@@ -284,7 +284,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
@@ -307,8 +307,8 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="space-y-6 text-zinc-400 font-light text-base md:text-lg leading-relaxed"
+              viewport={{ once: true, margin: "-20px" }}
+              className="space-y-6 text-zinc-400 font-normal text-base md:text-lg leading-relaxed"
             >
               <p>
                 Hello! I'm <strong className="text-white font-medium">Kasi Viswas</strong>, a passionate and self-driven AI Engineer based in <strong className="text-white font-medium">Visakhapatnam, India</strong>, currently pursuing my BCA degree at Aditya Degree College.
@@ -344,7 +344,7 @@ export default function About() {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold font-display text-white mb-1">{item.title}</h4>
-                    <p className="text-xs text-zinc-500 leading-relaxed font-light">{item.description}</p>
+                    <p className="text-xs text-zinc-500 leading-relaxed font-normal">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -433,7 +433,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             transition={{ type: "spring", stiffness: 60, damping: 15 }}
             className="lg:col-span-5 w-full relative"
           >

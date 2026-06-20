@@ -48,13 +48,17 @@ export default function AIAssistant() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 xs:bottom-6 xs:right-6 z-50 pointer-events-auto">
+    <div className={`fixed z-50 pointer-events-none transition-all duration-300 ${
+      isOpen 
+        ? 'inset-0 md:bottom-4 md:right-4 md:xs:bottom-6 md:xs:right-6 md:w-14 md:h-14 md:inset-auto' 
+        : 'bottom-4 right-4 xs:bottom-6 xs:right-6 w-14 h-14'
+    }`}>
       {/* Floating Toggle Button */}
       <motion.button
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-[#FF003C] hover:bg-[#FF3E6C] text-white flex items-center justify-center shadow-[0_0_20px_rgba(255,0,60,0.5)] transition-colors cursor-pointer border border-[#FF3E6C]/30"
+        className={`${isOpen ? 'hidden md:flex' : 'flex'} w-14 h-14 rounded-full bg-[#FF003C] hover:bg-[#FF3E6C] text-white items-center justify-center shadow-[0_0_20px_rgba(255,0,60,0.5)] transition-colors cursor-pointer border border-[#FF3E6C]/30 pointer-events-auto absolute bottom-0 right-0`}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -78,7 +82,7 @@ export default function AIAssistant() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            className="absolute bottom-16 right-0 w-[88vw] xs:w-[330px] md:w-[360px] h-[430px] md:h-[460px] rounded-2xl border border-[#FF003C]/25 bg-black/90 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col font-mono text-xs md:text-sm text-left"
+            className="fixed inset-0 z-50 md:absolute md:inset-auto md:bottom-16 md:right-0 w-full h-full md:w-[360px] md:h-[460px] md:rounded-2xl rounded-none border-0 md:border border-[#FF003C]/25 bg-black/95 md:bg-black/90 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col font-mono text-xs md:text-sm text-left pointer-events-auto"
           >
             {/* Header */}
             <div className="px-4 py-3 border-b border-white/5 bg-white/[0.02] flex items-center justify-between shrink-0 select-none">
@@ -86,9 +90,17 @@ export default function AIAssistant() {
                 <Bot size={16} className="text-[#FF003C]" />
                 <span className="font-bold text-white tracking-tight">genesis_agent_v1.0</span>
               </div>
-              <div className="flex items-center gap-1.5 text-[9px] text-zinc-500">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF003C] animate-ping"></span>
-                <span>INFERENCE_ACTIVE</span>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 text-[9px] text-zinc-500">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF003C] animate-ping"></span>
+                  <span>INFERENCE_ACTIVE</span>
+                </div>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="md:hidden w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                >
+                  <X size={16} />
+                </button>
               </div>
             </div>
 
