@@ -10,7 +10,6 @@ import {
   ArrowUpRight,
   Code2
 } from 'lucide-react';
-import TerminalIntro from './TerminalIntro';
 
 const NARRATIVE_TABS = [
   {
@@ -172,16 +171,14 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* ── TOP BENTO ROW: Editorial Narrative + Live Developer Terminal ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch">
-          
-          {/* Left: Tabbed Editorial Narrative Card */}
+        {/* ── TOP NARRATIVE CARD ── */}
+        <div className="w-full mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-7 flex flex-col p-6 sm:p-8 flowing-border-card card-shimmer-trail justify-between text-left"
+            className="w-full flex flex-col p-6 sm:p-8 md:p-10 flowing-border-card card-shimmer-trail justify-between text-left"
           >
             <div>
               {/* Tab Selector */}
@@ -190,7 +187,7 @@ export default function About() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveNarrativeTab(tab.id)}
-                    className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-black transition-all cursor-pointer ${
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-black transition-all cursor-pointer ${
                       activeNarrativeTab === tab.id
                         ? 'bg-[#000000] text-white border border-[#000000] shadow-xs'
                         : 'bg-[#FFFFFF] text-[#2E3033] hover:text-[#000000] hover:bg-[#F8F9FB] border border-[#D0D3D9] hover:border-[#000000]'
@@ -210,12 +207,12 @@ export default function About() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25 }}
-                  className="space-y-4"
+                  className="space-y-4 max-w-4xl"
                 >
-                  <h3 className="text-xl sm:text-2xl font-black font-display text-[#000000] tracking-tight">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black font-display text-[#000000] tracking-tight">
                     {activeTabContent.headline}
                   </h3>
-                  <div>
+                  <div className="text-base md:text-lg leading-relaxed">
                     {activeTabContent.content}
                   </div>
                 </motion.div>
@@ -223,38 +220,31 @@ export default function About() {
             </div>
 
             {/* Quick Metrics Bar at Bottom */}
-            <div className="grid grid-cols-3 gap-3 pt-6 mt-8 border-t border-[#E5E7EB]">
-              <div className="p-3 rounded-xl bg-[#F8F9FB] border border-[#D0D3D9] text-left">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-6 mt-8 border-t border-[#E5E7EB]">
+              <div className="p-3.5 rounded-xl bg-[#F8F9FB] border border-[#D0D3D9] text-left">
                 <span className="text-[10px] uppercase font-mono text-[#2E3033] font-black block">Role</span>
                 <span className="text-xs sm:text-sm font-black text-[#000000]">Full Stack Dev</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#F8F9FB] border border-[#D0D3D9] text-left">
+              <div className="p-3.5 rounded-xl bg-[#F8F9FB] border border-[#D0D3D9] text-left">
                 <span className="text-[10px] uppercase font-mono text-[#2E3033] font-black block">Specialty</span>
                 <span className="text-xs sm:text-sm font-black text-[#000000]">React & Node.js</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#F8F9FB] border border-[#D0D3D9] text-left">
+              <div className="p-3.5 rounded-xl bg-[#F8F9FB] border border-[#D0D3D9] text-left">
+                <span className="text-[10px] uppercase font-mono text-[#2E3033] font-black block">Focus</span>
+                <span className="text-xs sm:text-sm font-black text-[#000000]">Web & AI Agents</span>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#F8F9FB] border border-[#D0D3D9] text-left">
                 <span className="text-[10px] uppercase font-mono text-[#2E3033] font-black block">Availability</span>
                 <span className="text-xs sm:text-sm font-black text-[#000000] flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Open
+                  Open to Work
                 </span>
               </div>
             </div>
           </motion.div>
-
-          {/* Right: Embedded Interactive Developer Terminal */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-5 flex flex-col"
-          >
-            <TerminalIntro />
-          </motion.div>
-
         </div>
 
         {/* ── INTERACTIVE EDUCATION & ACADEMIC PATH HUB ── */}

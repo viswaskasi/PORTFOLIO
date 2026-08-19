@@ -265,7 +265,10 @@ function App() {
       </div>
 
       {/* ── Global Interactive Utilities & Modals ── */}
-      <AIAssistant />
+      <AIAssistant 
+        onViewResume={() => setResumeOpen(true)}
+        onOpenRecruiterMode={() => setRecruiterModeOpen(true)}
+      />
       <ResumeViewer isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
       <RecruiterMode 
         isOpen={recruiterModeOpen} 
