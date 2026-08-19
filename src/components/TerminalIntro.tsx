@@ -66,13 +66,13 @@ export default function TerminalIntro() {
         break;
       case 'skills':
         newHistory.push({
-          text: 'Primary Stack:\n- AI/ML: LangChain.js, Generative APIs, Prompt Engineering, NLP\n- Backend: Node.js, Express.js, MongoDB\n- Frontend: React.js, TypeScript, TailwindCSS v4, GSAP, Three.js\n- Systems: Python, OpenCV, C, Git',
+          text: 'Primary Stack:\n- AI/ML: LangChain.js, Generative APIs, Prompt Engineering, NLP\n- Backend: Node.js, Express.js, MongoDB\n- Frontend: React.js, TypeScript, TailwindCSS, Three.js\n- Systems: Python, OpenCV, C, Git',
           type: 'output'
         });
         break;
       case 'projects':
         newHistory.push({
-          text: 'Key Showcase:\n- V-CHAT: Advanced Multi-LLM Chat Assistant\n- Gesture Volume: Hand Landmarking Computer Vision HUD\n- Background Remover: Automated U2-Net Preprocessing Pipeline',
+          text: 'Key Showcase:\n- VYRIS 8.0: Voice Assistant & Local LLMs\n- V-CHAT: Advanced Multi-LLM Chat Assistant\n- Gesture Volume: Hand Landmarking Computer Vision HUD\n- Background Remover: Automated U2-Net Preprocessing Pipeline',
           type: 'output'
         });
         break;
@@ -111,24 +111,21 @@ export default function TerminalIntro() {
   return (
     <div 
       onClick={focusInput}
-      className="w-full rounded-2xl border border-[#FF003C]/25 bg-black/80 backdrop-blur-xl shadow-2xl overflow-hidden font-mono text-xs md:text-sm text-left h-[380px] flex flex-col relative group cursor-text"
+      className="w-full rounded-2xl border border-[#D0D3D9] bg-[#FFFFFF] shadow-xs overflow-hidden font-mono text-xs md:text-sm text-left h-[380px] flex flex-col relative group cursor-text transition-all duration-300 hover:border-[#333538] hover:shadow-sm"
     >
-      {/* Glow highlight */}
-      <div className="absolute inset-0 border border-[#FF003C]/10 rounded-2xl pointer-events-none group-hover:border-[#FF003C]/25 transition-all duration-300"></div>
-
       {/* Terminal Title Bar */}
-      <div className="flex items-center justify-between px-5 py-3 border-b border-white/5 bg-white/[0.02] shrink-0 select-none">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-[#E5E7EB] bg-[#F8F9FB] shrink-0 select-none">
         <div className="flex gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#FF003C]/30 border border-[#FF003C] hover:bg-[#FF003C] transition-colors"></span>
-          <span className="w-3 h-3 rounded-full bg-zinc-800"></span>
-          <span className="w-3 h-3 rounded-full bg-zinc-800"></span>
+          <span className="w-3 h-3 rounded-full bg-[#0E0E0E]"></span>
+          <span className="w-3 h-3 rounded-full bg-[#0E0E0E]/40"></span>
+          <span className="w-3 h-3 rounded-full bg-[#0E0E0E]/20"></span>
         </div>
-        <span className="text-[10px] text-zinc-500 tracking-wider flex items-center gap-1.5 uppercase font-bold">
-          <Terminal size={12} className="text-[#FF003C]" />
+        <span className="text-[10px] text-[#000000] tracking-wider flex items-center gap-1.5 uppercase font-bold">
+          <Terminal size={12} className="text-[#000000]" />
           genesis_core.sh
         </span>
-        <div className="flex items-center gap-1.5 text-zinc-600 text-[10px]">
-          <Shield size={10} className="text-[#FF003C]/50" />
+        <div className="flex items-center gap-1.5 text-[#000000] text-[10px] font-bold">
+          <Shield size={10} className="text-[#000000]" />
           <span>SSL_SECURE</span>
         </div>
       </div>
@@ -136,23 +133,23 @@ export default function TerminalIntro() {
       {/* Log Feed Display */}
       <div 
         ref={scrollContainerRef}
-        className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-2.5 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent"
+        className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-2.5 scrollbar-thin bg-[#FFFFFF]"
       >
         {history.map((line, idx) => (
           <div 
             key={idx} 
             className={`whitespace-pre-line leading-relaxed ${
-              line.type === 'system' ? 'text-[#FF3E6C]/90 font-semibold' :
-              line.type === 'input' ? 'text-white' :
-              line.type === 'error' ? 'text-red-400' : 'text-zinc-300 font-normal'
+              line.type === 'system' ? 'text-[#000000] font-bold' :
+              line.type === 'input' ? 'text-[#000000] font-black' :
+              line.type === 'error' ? 'text-rose-600 font-bold' : 'text-[#2E3033] font-semibold'
             }`}
           >
             {line.text}
           </div>
         ))}
         {bootIndex < BOOT_SEQUENCE.length && (
-          <div className="flex items-center gap-2 text-[#FF003C] text-xs">
-            <RefreshCw size={12} className="animate-spin" />
+          <div className="flex items-center gap-2 text-[#000000] text-xs font-bold">
+            <RefreshCw size={12} className="animate-spin text-[#000000]" />
             <span>Booting modules...</span>
           </div>
         )}
@@ -162,15 +159,15 @@ export default function TerminalIntro() {
       {bootIndex >= BOOT_SEQUENCE.length && (
         <form 
           onSubmit={handleCommandSubmit}
-          className="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-4 border-t border-white/5 bg-white/[0.01] shrink-0"
+          className="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-4 border-t border-[#E5E7EB] bg-[#F8F9FB] shrink-0"
         >
-          <span className="text-[#FF003C] font-semibold select-none">viswas@vk-dev:~$</span>
+          <span className="text-[#000000] font-black select-none">viswas@vk-dev:~$</span>
           <input
             ref={inputRef}
             type="text"
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
-            className="flex-1 bg-transparent border-none outline-none text-white font-mono text-xs md:text-sm focus:ring-0 p-0"
+            className="flex-1 bg-transparent border-none outline-none text-[#000000] font-mono text-xs md:text-sm font-bold focus:ring-0 p-0 placeholder-[#2E3033]/60"
             placeholder='Type command (e.g. "help", "skills")...'
             autoComplete="off"
             autoCorrect="off"

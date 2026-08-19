@@ -30,12 +30,12 @@ export default function TechStackFloating() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-[#FF003C]/10 text-zinc-500 hover:text-[#FF003C] hover:border-[#FF003C]/30 hover:bg-black/60 hover:scale-105 transition-all duration-300 pointer-events-auto cursor-default shadow-md shadow-black"
+          className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#FFFFFF] border border-[#D0D3D9] text-[#000000] hover:bg-[#F8F9FB] hover:border-[#000000] hover:scale-105 transition-all duration-300 pointer-events-auto cursor-default shadow-xs group"
         >
-          <div className="text-[#FF003C]/60 hover:text-[#FF003C] transition-colors">
+          <div className="text-[#000000] transition-colors">
             {item.component}
           </div>
-          <span className="text-[10px] uppercase font-mono tracking-widest font-bold">
+          <span className="text-[10px] uppercase font-mono tracking-widest font-black">
             {item.label}
           </span>
         </motion.div>

@@ -52,7 +52,7 @@ export default function ResumeViewer({ isOpen, onClose }: ResumeViewerProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md"
+            className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-md"
             onClick={onClose}
           />
 
@@ -68,28 +68,27 @@ export default function ResumeViewer({ isOpen, onClose }: ResumeViewerProps) {
                 : 'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[95vw] h-[90vh] md:w-[80vw] md:h-[85vh] lg:w-[65vw] lg:h-[88vh] rounded-2xl'
             }`}
           >
-            {/* Outer glow border */}
-            <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-[#FF003C]/35 via-[#FF3E6C]/10 to-[#FF003C]/20 pointer-events-none" />
-
             {/* Main container */}
-            <div className="relative flex flex-col h-full bg-[#09090b] rounded-2xl border border-white/[0.08] overflow-hidden shadow-[0_0_60px_rgba(255,0,60,0.08)]">
+            <div className="relative flex flex-col h-full bg-[#FFFFFF] rounded-2xl border border-[#D0D3D9] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+              {/* Top Accent Line */}
+              <div className="h-1.5 w-full bg-[#000000] shrink-0" />
 
               {/* ── Header Bar ── */}
-              <div className="flex items-center justify-between px-5 md:px-6 py-4 border-b border-white/[0.06] bg-[#09090b]/90 backdrop-blur-sm">
+              <div className="flex items-center justify-between px-5 md:px-6 py-4 border-b border-[#E5E7EB] bg-[#F8F9FB]">
                 {/* Left: File info */}
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-[#FF003C]/10 border border-[#FF003C]/20">
-                    <FileText size={16} className="text-[#FF003C]" />
+                  <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-[#FFFFFF] border border-[#D0D3D9] shadow-xs">
+                    <FileText size={16} className="text-[#000000]" />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+                    <h3 className="text-sm font-black text-[#000000] tracking-tight flex items-center gap-2">
                       Kasi Viswas — Resume
-                      <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FF003C]/10 border border-[#FF003C]/20 text-[9px] font-bold uppercase tracking-wider text-[#FF003C]">
-                        <Eye size={8} />
+                      <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FFFFFF] border border-[#D0D3D9] text-[9px] font-black uppercase tracking-wider text-[#000000] shadow-xs">
+                        <Eye size={8} className="text-[#000000]" />
                         Live Preview
                       </span>
                     </h3>
-                    <p className="text-[11px] text-zinc-500 font-mono mt-0.5">resume.pdf</p>
+                    <p className="text-[11px] text-[#2E3033] font-mono mt-0.5 font-bold">resume.pdf</p>
                   </div>
                 </div>
 
@@ -98,7 +97,7 @@ export default function ResumeViewer({ isOpen, onClose }: ResumeViewerProps) {
                   {/* Open in new tab */}
                   <button
                     onClick={() => window.open('/resume.pdf', '_blank')}
-                    className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-medium text-zinc-400 hover:text-white bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-white/10 transition-all duration-300 cursor-pointer"
+                    className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-bold text-[#000000] bg-[#FFFFFF] hover:bg-[#F8F9FB] hover:border-[#000000] border border-[#D0D3D9] transition-all duration-200 cursor-pointer shadow-xs"
                     title="Open in new tab"
                   >
                     <ExternalLink size={12} />
@@ -108,7 +107,7 @@ export default function ResumeViewer({ isOpen, onClose }: ResumeViewerProps) {
                   {/* Fullscreen toggle */}
                   <button
                     onClick={() => setIsFullscreen(!isFullscreen)}
-                    className="hidden md:flex items-center justify-center w-9 h-9 rounded-lg text-zinc-400 hover:text-white bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-white/10 transition-all duration-300 cursor-pointer"
+                    className="hidden md:flex items-center justify-center w-9 h-9 rounded-lg text-[#000000] bg-[#FFFFFF] hover:bg-[#F8F9FB] hover:border-[#000000] border border-[#D0D3D9] transition-all duration-200 cursor-pointer shadow-xs"
                     title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                   >
                     {isFullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
@@ -117,16 +116,16 @@ export default function ResumeViewer({ isOpen, onClose }: ResumeViewerProps) {
                   {/* Download button */}
                   <button
                     onClick={handleDownload}
-                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-[11px] font-semibold text-white bg-gradient-to-r from-[#FF003C] to-[#FF3E6C] border border-[#FF003C]/35 hover:border-[#FF003C]/60 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,60,0.15)] hover:shadow-[0_0_30px_rgba(255,0,60,0.3)] cursor-pointer"
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-[11px] font-black text-white bg-[#000000] hover:bg-[#1C1C1C] hover:border-[#333538] border border-[#000000] transition-all duration-200 shadow-xs cursor-pointer"
                   >
-                    <Download size={13} />
+                    <Download size={13} className="text-white" />
                     <span>Download</span>
                   </button>
 
                   {/* Close button */}
                   <button
                     onClick={onClose}
-                    className="flex items-center justify-center w-9 h-9 rounded-lg text-zinc-400 hover:text-white bg-white/[0.03] hover:bg-red-500/10 border border-white/[0.06] hover:border-red-500/30 transition-all duration-300 cursor-pointer"
+                    className="flex items-center justify-center w-9 h-9 rounded-lg text-[#000000] hover:bg-[#F8F9FB] border border-[#D0D3D9] hover:border-[#000000] transition-all duration-200 cursor-pointer shadow-xs"
                     title="Close"
                   >
                     <X size={16} />
@@ -135,41 +134,45 @@ export default function ResumeViewer({ isOpen, onClose }: ResumeViewerProps) {
               </div>
 
               {/* ── PDF Viewer Area ── */}
-              <div className="flex-1 relative bg-[#050505]">
+              <div 
+                data-lenis-prevent
+                onWheel={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+                className="flex-1 relative bg-[#F8F9FB] overflow-auto"
+              >
                 {/* Loading skeleton */}
                 {isLoading && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10">
                     <div className="relative w-14 h-14">
-                      <div className="absolute inset-0 rounded-full border-2 border-[#FF003C]/20" />
-                      <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-[#FF003C] animate-spin" />
+                      <div className="absolute inset-0 rounded-full border-2 border-[#D0D3D9]" />
+                      <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-[#000000] animate-spin" />
                     </div>
                     <div className="flex flex-col items-center gap-1">
-                      <span className="text-sm font-medium text-zinc-300">Loading Resume</span>
-                      <span className="text-[11px] text-zinc-500 font-mono">Initializing document viewer...</span>
+                      <span className="text-sm font-black text-[#000000]">Loading Resume</span>
+                      <span className="text-[11px] text-[#2E3033] font-mono font-bold">Initializing document viewer...</span>
                     </div>
                   </div>
                 )}
 
-                {/* Embedded PDF - Fit entire page in view */}
+                {/* Embedded PDF */}
                 <iframe
                   src="/resume.pdf#toolbar=1&navpanes=0&view=Fit&zoom=page-fit"
                   className="w-full h-full border-0"
                   title="Resume Preview"
-                  style={{ overflow: 'hidden' }}
                   onLoad={() => setIsLoading(false)}
                 />
               </div>
 
               {/* ── Bottom Status Bar ── */}
-              <div className="flex items-center justify-between px-5 md:px-6 py-2.5 border-t border-white/[0.06] bg-[#09090b]">
+              <div className="flex items-center justify-between px-5 md:px-6 py-2.5 border-t border-[#E5E7EB] bg-[#F8F9FB]">
                 <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+                  <span className="flex items-center gap-1.5 text-[10px] font-mono text-[#000000] font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                     Document Ready
                   </span>
-                  <span className="text-[10px] text-zinc-600 font-mono hidden sm:inline">PDF</span>
+                  <span className="text-[10px] text-[#2E3033] font-mono hidden sm:inline font-bold">PDF</span>
                 </div>
-                <span className="text-[10px] text-zinc-600 font-mono">
+                <span className="text-[10px] text-[#2E3033] font-mono font-bold">
                   Press ESC to close
                 </span>
               </div>

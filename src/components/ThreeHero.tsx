@@ -61,10 +61,24 @@ function NeuralNetwork({ isVisibleRef }: NeuralNetworkProps) {
       vel[i * 3 + 1] = (Math.random() - 0.5) * 0.006;
       vel[i * 3 + 2] = (Math.random() - 0.5) * 0.006;
 
-      // Color mapping: Neon red with variations
-      col[i * 3] = 1.0;                                 // R
-      col[i * 3 + 1] = Math.random() * 0.15;            // G
-      col[i * 3 + 2] = 0.2 + Math.random() * 0.2;       // B
+      // Color mapping for White Theme: High-contrast rich charcoal, slate, and dark tones
+      const colorVariant = Math.random();
+      if (colorVariant < 0.50) {
+        // Deep Charcoal #0E0E0E
+        col[i * 3] = 0.05;
+        col[i * 3 + 1] = 0.05;
+        col[i * 3 + 2] = 0.05;
+      } else if (colorVariant < 0.80) {
+        // Slate Dark #333538
+        col[i * 3] = 0.2;
+        col[i * 3 + 1] = 0.21;
+        col[i * 3 + 2] = 0.22;
+      } else {
+        // Muted Slate #66676A
+        col[i * 3] = 0.4;
+        col[i * 3 + 1] = 0.4;
+        col[i * 3 + 2] = 0.41;
+      }
 
       // Pre-calculate target coordinates forming a V shape
       if (i < 40) {
@@ -151,7 +165,7 @@ function NeuralNetwork({ isVisibleRef }: NeuralNetworkProps) {
       const ty = vTargets[i * 3 + 1];
       const tz = vTargets[i * 3 + 2];
 
-      // Add a subtle electric wavy vibration to the V-shape when formed
+      // Add a subtle vibration to the V-shape when formed
       let finalTx = tx;
       let finalTy = ty;
       if (easeProgress > 0.05) {
@@ -167,7 +181,7 @@ function NeuralNetwork({ isVisibleRef }: NeuralNetworkProps) {
     }
     posAttr.needsUpdate = true;
 
-    // Connect line segments using preallocated arrays (0 allocations during tick)
+    // Connect line segments using preallocated arrays
     const lineGeom = linesRef.current.geometry;
     const linePosAttr = lineGeom.attributes.position as THREE.BufferAttribute;
     const lineColAttr = lineGeom.attributes.color as THREE.BufferAttribute;
@@ -215,9 +229,10 @@ function NeuralNetwork({ isVisibleRef }: NeuralNetworkProps) {
           linePosArr[offset + 5] = z2;
 
           const alpha = 1.0 - dist / MAX_DISTANCE;
-          const r = 1.0;
-          const g = 0.0;
-          const b = 0.15 * alpha;
+          // Crisp clean lines on white canvas
+          const r = 0.15 * alpha;
+          const g = 0.15 * alpha;
+          const b = 0.18 * alpha;
 
           lineColArr[offset] = r;
           lineColArr[offset + 1] = g;
@@ -251,13 +266,13 @@ function NeuralNetwork({ isVisibleRef }: NeuralNetworkProps) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.12}
+          size={0.13}
           vertexColors
           transparent
-          opacity={0.85}
+          opacity={0.9}
           sizeAttenuation={true}
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
+          blending={THREE.NormalBlending}
         />
       </points>
 
@@ -276,10 +291,10 @@ function NeuralNetwork({ isVisibleRef }: NeuralNetworkProps) {
         <lineBasicMaterial
           vertexColors
           transparent
-          opacity={0.35}
-          blending={THREE.AdditiveBlending}
+          opacity={0.5}
+          blending={THREE.NormalBlending}
           depthWrite={false}
-          linewidth={1}
+          linewidth={1.2}
         />
       </lineSegments>
     </group>
@@ -295,7 +310,7 @@ export default function ThreeHero() {
       ([entry]) => {
         isVisibleRef.current = entry.isIntersecting;
       },
-      { threshold: 0.01 } // Trigger culling if less than 1% of canvas is visible
+      { threshold: 0.01 }
     );
 
     if (containerRef.current) {
@@ -314,12 +329,13 @@ export default function ThreeHero() {
     >
       <Canvas
         camera={{ position: [0, 0, 6.5], fov: 60 }}
-        gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, 1.5]}
         style={{ background: 'transparent', width: '100%', height: '100%', overflow: 'visible' }}
       >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} color="#FF003C" />
+        <ambientLight intensity={0.9} />
+        <pointLight position={[10, 10, 10]} intensity={1.5} color="#0E0E0E" />
+        <pointLight position={[-10, -10, -10]} intensity={1} color="#66676A" />
         <NeuralNetwork isVisibleRef={isVisibleRef} />
       </Canvas>
     </div>

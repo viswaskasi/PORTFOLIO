@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import InitialPreloader from './components/InitialPreloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,11 +13,15 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ResumeViewer from './components/ResumeViewer';
 import AIAssistant from './components/AIAssistant';
+import RecruiterMode from './components/RecruiterMode';
+import CommandPalette from './components/CommandPalette';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [recruiterModeOpen, setRecruiterModeOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [mounted, setMounted] = useState(true);
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -38,26 +43,31 @@ function App() {
 
     setMounted(true);
 
-    // Initialize Lenis smooth scroll ONLY on desktop (non-touch devices)
-    // Mobile browsers have native smooth scrolling — Lenis hijacks touch events and causes sticking
+    // ─── Initialize Butter-Smooth Lenis Scroll synchronized with GSAP Ticker ───
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    let rafId: number | null = null;
+    let tickerCallback: ((time: number) => void) | null = null;
 
     if (!isTouchDevice) {
       const lenis = new Lenis({
-        duration: 0.9,
+        duration: 1.4,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
         smoothWheel: true,
+        wheelMultiplier: 1.05,
+        touchMultiplier: 1.5,
+        infinite: false,
       });
       lenisRef.current = lenis;
 
       lenis.on('scroll', ScrollTrigger.update);
 
-      const raf = (time: number) => {
-        lenis.raf(time);
-        rafId = requestAnimationFrame(raf);
+      tickerCallback = (time: number) => {
+        lenis.raf(time * 1000);
       };
-      rafId = requestAnimationFrame(raf);
+
+      gsap.ticker.add(tickerCallback);
+      gsap.ticker.lagSmoothing(0);
     }
 
     // ─── Custom Cursor Mouse Event Handler ───
@@ -66,7 +76,6 @@ function App() {
       const ring = cursorRingRef.current;
       if (!dot || !ring) return;
 
-      // Animate dot and ring positions
       gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.05, ease: 'power2.out' });
       gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.15, ease: 'power2.out' });
     };
@@ -79,7 +88,16 @@ function App() {
       document.body.classList.remove('cursor-hover');
     };
 
+    // ─── Keyboard Shortcut Listener for Cmd+K / Ctrl+K ───
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('keydown', handleKeyDown);
 
     // Add hover listener to clickables
     const addCursorHoverListeners = () => {
@@ -90,7 +108,6 @@ function App() {
       });
     };
 
-    // Delay a bit to ensure elements are mounted
     const hoverTimeout = setTimeout(addCursorHoverListeners, 1000);
 
     // ─── IntersectionObserver Scroll Reveal ───
@@ -132,20 +149,42 @@ function App() {
       clearTimeout(scrollTimeout);
       clearTimeout(hoverTimeout);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('scroll', handleScrollProgress);
       revealCleanup();
-      if (rafId) cancelAnimationFrame(rafId);
+      if (tickerCallback) {
+        gsap.ticker.remove(tickerCallback);
+      }
       if (lenisRef.current) {
         lenisRef.current.destroy();
       }
     };
   }, []);
 
+  // ─── Pause Lenis & Lock Body Scroll When Modals Open ───
+  const isAnyModalOpen = resumeOpen || recruiterModeOpen || commandPaletteOpen;
+
+  useEffect(() => {
+    if (isAnyModalOpen) {
+      lenisRef.current?.stop();
+      document.body.style.overflow = 'hidden';
+    } else {
+      lenisRef.current?.start();
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isAnyModalOpen]);
+
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-background text-white font-sans selection:bg-[#FF003C]/30 relative overflow-x-hidden transition-colors duration-500">
+    <div className="min-h-screen bg-[#FFFFFF] text-[#0E0E0E] font-sans selection:bg-[#000000] selection:text-[#FFFFFF] relative overflow-x-hidden transition-colors duration-500">
       
+      {/* ── Initial Rotating Logo Portfolio Intro ── */}
+      <InitialPreloader />
+
       {/* ── Viewport Scroll Progress Indicator Line ── */}
       <div className="scroll-progress-bar" />
 
@@ -155,25 +194,49 @@ function App() {
         <div ref={cursorRingRef} className="custom-cursor-ring" />
       </div>
 
-      {/* ── Dynamic Mesh Gradient Background ── */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Subtle grid mesh */}
-        <div className="absolute inset-0 cyber-grid opacity-[0.03]"></div>
-        {/* Moving ambient glowing lights */}
-        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#FF003C]/8 blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#FF3E6C]/4 blur-[150px]"></div>
+      {/* ── Dynamic Ambient Background Mesh for White Theme ── */}
+      <div className="fixed-bg-stage select-none">
+        <div className="absolute -top-[20%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-[#F0F2F5]/80 blur-[150px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-[40%] -right-[15%] w-[50vw] h-[50vw] rounded-full bg-[#E7E8EB]/50 blur-[160px]" />
+        <div className="absolute -bottom-[20%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-[#F8F9FB] blur-[140px]" />
+        <div className="absolute inset-0 cyber-grid opacity-50" />
+      </div>
+
+      {/* ── Fixed Centered Ambient Profile Silhouette Background Image ── */}
+      <div className="fixed-bg-stage lg:pl-64 select-none">
+        <div className="w-full h-full flex items-center justify-center p-4 pointer-events-none relative">
+          <img
+            src="/profile-bg.png"
+            alt="Profile Silhouette Background"
+            aria-hidden="true"
+            className="w-[75vw] sm:w-[75vw] md:w-[70vw] lg:w-[85vw] max-w-[280px] xs:max-w-[320px] sm:max-w-[520px] md:max-w-[850px] lg:max-w-[1050px] max-h-[55vh] sm:max-h-[75vh] md:max-h-[88vh] object-contain object-center opacity-[0.14] sm:opacity-[0.18] md:opacity-[0.22] grayscale contrast-125 select-none mix-blend-multiply relative z-[1]"
+            style={{
+              maskImage: 'radial-gradient(ellipse at 50% 50%, black 50%, transparent 92%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, black 50%, transparent 92%)',
+              transform: 'translateZ(0)',
+              WebkitTransform: 'translateZ(0)'
+            }}
+          />
+        </div>
       </div>
 
       {/* ── NAVIGATION NAVBAR ── */}
-      <Navbar onViewResume={() => setResumeOpen(true)} />
+      <Navbar 
+        onOpenRecruiterMode={() => setRecruiterModeOpen(true)}
+        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        onViewResume={() => setResumeOpen(true)}
+      />
 
       {/* ── MAIN PORTFOLIO CONTENT ── */}
       <div className="relative z-10 lg:pl-64 flex flex-col min-h-screen">
-        <div className="flex-1 w-full max-w-6xl mx-auto px-4 md:px-8 py-10 lg:py-16">
+        <div className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 lg:pt-16 pb-12 lg:pb-16">
           <main className="w-full space-y-12 md:space-y-20">
             
             <div className="reveal-on-scroll">
-              <Hero />
+              <Hero 
+                onOpenResume={() => setResumeOpen(true)}
+                onOpenRecruiterMode={() => setRecruiterModeOpen(true)}
+              />
             </div>
 
             <div className="reveal-on-scroll">
@@ -192,8 +255,6 @@ function App() {
               <Experience />
             </div>
 
-
-
             <div className="reveal-on-scroll">
               <Contact />
             </div>
@@ -203,11 +264,20 @@ function App() {
         <Footer />
       </div>
 
-      {/* ── AI Assistant Chat Widget ── */}
+      {/* ── Global Interactive Utilities & Modals ── */}
       <AIAssistant />
-
-      {/* ── Resume Viewer Modal ── */}
       <ResumeViewer isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
+      <RecruiterMode 
+        isOpen={recruiterModeOpen} 
+        onClose={() => setRecruiterModeOpen(false)} 
+        onOpenResume={() => setResumeOpen(true)}
+      />
+      <CommandPalette 
+        isOpen={commandPaletteOpen} 
+        onClose={() => setCommandPaletteOpen(false)} 
+        onOpenResume={() => setResumeOpen(true)}
+        onOpenRecruiterMode={() => setRecruiterModeOpen(true)}
+      />
     </div>
   );
 }

@@ -15,8 +15,7 @@ const milestones = [
       'Covered regression, classification, clustering, and recommender systems.',
       'Developed classification models with evaluation metrics (F1-Score, Jaccard).'
     ],
-    color: '#FF003C',
-    glowColor: 'rgba(255, 0, 60, 0.15)'
+    color: '#000000'
   },
   {
     type: 'certification',
@@ -31,8 +30,7 @@ const milestones = [
       'Mastered conditional execution, complex loops, and nested control flow configs.',
       'Implemented robust, memory-safe data processing routines and library modules.'
     ],
-    color: '#FF3E6C',
-    glowColor: 'rgba(255, 62, 108, 0.15)'
+    color: '#000000'
   },
   {
     type: 'certification',
@@ -47,8 +45,7 @@ const milestones = [
       'Developed modular scripts leveraging object-oriented programming (OOP) paradigms.',
       'Built algorithm scripts and automation pipelines using Python\'s standard packages.'
     ],
-    color: '#9B001C',
-    glowColor: 'rgba(155, 0, 28, 0.15)'
+    color: '#000000'
   },
   {
     type: 'certification',
@@ -63,8 +60,7 @@ const milestones = [
       'Documented results demonstrating technical writing and research methodology.',
       'Published in peer-reviewed science journal.'
     ],
-    color: '#FF003C',
-    glowColor: 'rgba(255, 0, 60, 0.15)'
+    color: '#000000'
   }
 ];
 
@@ -96,7 +92,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-20 relative overflow-hidden bg-transparent">
       {/* Background Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[#FF003C]/5 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[#F0F2F5] blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -108,15 +104,18 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="mb-20 text-left"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#FF003C]/20 bg-[#FF003C]/5 text-xs font-semibold text-[#FF003C] mb-4 tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#D0D3D9] bg-[#FFFFFF] text-xs font-bold text-[#000000] mb-4 tracking-wider uppercase font-mono shadow-xs">
             <Award size={12} />
             Timeline
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold font-display text-white tracking-tight">
-            My <span className="text-gradient-purple font-extrabold" style={{ '--color-accent': '#FF003C' } as React.CSSProperties}>Certifications</span>
+          <h2 className="text-4xl md:text-5xl font-black font-display text-[#000000] tracking-tight">
+            My <span className="text-[#000000] font-black">Certifications</span>
           </h2>
-          <div className="h-1 w-16 bg-gradient-to-r from-[#FF003C] to-[#FF3E6C] rounded-full mt-4"></div>
-          <p className="mt-4 text-zinc-500 max-w-2xl font-normal text-base md:text-lg">
+          <div className="flex items-center gap-2 mt-4">
+            <div className="h-1.5 w-16 bg-[#000000] rounded-full"></div>
+            <div className="h-1.5 w-3 bg-[#66676A] rounded-full"></div>
+          </div>
+          <p className="mt-4 text-[#2E3033] max-w-2xl font-semibold text-base md:text-lg">
             A comprehensive look at my professional credentials, published research papers, and technical mastery certifications.
           </p>
         </motion.div>
@@ -125,7 +124,7 @@ export default function Experience() {
         <div className="relative pl-4 md:pl-0">
           
           {/* Vertical Path Guide Line */}
-          <div className="absolute left-[5px] md:left-1/2 top-4 bottom-4 w-[1px] bg-gradient-to-b from-[#FF003C] via-[#FF3E6C] to-transparent transform md:-translate-x-1/2 z-0 opacity-40"></div>
+          <div className="absolute left-[5px] md:left-1/2 top-4 bottom-4 w-[2px] bg-[#D0D3D9] transform md:-translate-x-1/2 z-0"></div>
 
           {/* Timeline Nodes */}
           <div className="space-y-16">
@@ -143,16 +142,13 @@ export default function Experience() {
                   <div className="absolute left-[5px] md:left-1/2 top-6 -translate-x-1/2 z-10 flex items-center justify-center">
                     <span className="relative flex h-4 w-4">
                       <span 
-                        className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-35"
-                        style={{ backgroundColor: item.color }}
+                        className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-40 bg-[#000000]"
                       ></span>
                       <span 
-                        className="relative inline-flex rounded-full h-4 w-4 border border-white/20 bg-black"
-                        style={{ boxShadow: `0 0 8px ${item.color}` }}
+                        className="relative inline-flex rounded-full h-4 w-4 border-2 border-[#000000]/50 bg-[#FFFFFF] shadow-sm"
                       >
                         <span 
-                          className="m-auto h-1.5 w-1.5 rounded-full"
-                          style={{ backgroundColor: item.color }}
+                          className="m-auto h-1.5 w-1.5 rounded-full bg-[#000000]"
                         ></span>
                       </span>
                     </span>
@@ -171,46 +167,40 @@ export default function Experience() {
                       }}
                       viewport={{ once: true, margin: "-20px" }}
                       transition={{ type: "spring", stiffness: 60, damping: 15 }}
-                      className="p-6 flowing-border-card card-shimmer-trail"
+                      className="group p-6 flowing-border-card card-shimmer-trail"
                     >
                       <div className={`flex items-start gap-4 mb-4 ${isEven ? 'md:flex-row-reverse md:text-right' : 'text-left'}`}>
                         <div 
-                          className="p-2.5 rounded-xl border shrink-0 flex items-center justify-center"
-                          style={{
-                            color: item.color,
-                            borderColor: `${item.color}25`,
-                            backgroundColor: `${item.color}08`,
-                            borderWidth: '1px'
-                          }}
+                          className="p-2.5 rounded-xl border border-[#D0D3D9] group-hover:border-[#000000] group-hover:bg-[#000000] bg-[#F8F9FB] text-[#000000] group-hover:text-white shrink-0 flex items-center justify-center shadow-xs transition-colors"
                         >
                           <Award size={18} />
                         </div>
                         <div>
-                          <span className="inline-flex items-center px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-mono font-bold uppercase tracking-wider text-zinc-400 mb-1">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#F8F9FB] border border-[#D0D3D9] group-hover:border-[#000000] text-[9px] font-mono font-black uppercase tracking-wider text-[#000000] mb-1 transition-colors">
                             {item.status}
                           </span>
-                          <h3 className="text-lg font-bold font-display text-white tracking-tight">
+                          <h3 className="text-lg font-black font-display text-[#000000] tracking-tight">
                             {item.title}
                           </h3>
-                          <p className="text-xs font-medium mt-0.5 font-display" style={{ color: item.color }}>
+                          <p className="text-xs font-bold mt-0.5 font-display text-[#2E3033]">
                             {item.subtitle}
                           </p>
                         </div>
                       </div>
 
                       {/* Timeline subdetails */}
-                      <div className={`flex flex-wrap items-center gap-4 text-[10px] text-zinc-500 mb-4 font-mono ${isEven ? 'md:justify-end' : 'justify-start'}`}>
+                      <div className={`flex flex-wrap items-center gap-4 text-[10px] text-[#2E3033] mb-4 font-mono font-bold ${isEven ? 'md:justify-end' : 'justify-start'}`}>
                         <span className="flex items-center gap-1">
-                          <Calendar size={11} />
+                          <Calendar size={11} className="text-[#000000]" />
                           {item.date}
                         </span>
                         <span className="flex items-center gap-1">
-                          <MapPin size={11} />
+                          <MapPin size={11} className="text-[#000000]" />
                           {item.location}
                         </span>
                       </div>
 
-                      <p className="text-xs text-zinc-400 font-normal leading-relaxed mb-4 text-left">
+                      <p className="text-xs text-[#2E3033] font-medium leading-relaxed mb-4 text-left">
                         {item.description}
                       </p>
 
@@ -220,15 +210,15 @@ export default function Experience() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className={`space-y-2 mt-4 pt-4 border-t border-white/5 text-left`}
+                        className={`space-y-2 mt-4 pt-4 border-t border-[#E5E7EB] text-left`}
                       >
                         {item.details.map((detail, idx) => (
                           <motion.li 
                             key={idx} 
                             variants={itemVariants}
-                            className="flex items-start gap-2 text-xs text-zinc-400 font-normal leading-relaxed group/bullet"
+                            className="flex items-start gap-2 text-xs text-[#2E3033] font-semibold leading-relaxed group/bullet"
                           >
-                            <CheckCircle size={12} className="mt-0.5 shrink-0" style={{ color: item.color }} />
+                            <CheckCircle size={13} className="mt-0.5 shrink-0 text-[#000000] stroke-[2.5]" />
                             <span>
                               {detail}
                             </span>

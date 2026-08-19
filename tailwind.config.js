@@ -8,9 +8,19 @@ export default {
     extend: {
       colors: {
         background: "#000000",
-        primary: "#ffffff", // white
-        secondary: "#a3a3a3", // gray-400
-        accent: "#171717", // neutral-900 for dark glass
+        primary: "#D1D0D0",
+        secondary: "#988686",
+        accent: "#D71920",
+        taupe: "#988686",
+        platinum: "#D1D0D0",
+        espresso: "#5C4E4E",
+        crimson: {
+          DEFAULT: "#D71920",
+          hover: "#B51218",
+          dark: "#8F1014",
+          subtle: "#FEF2F2",
+          border: "rgba(215, 25, 32, 0.2)",
+        },
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
