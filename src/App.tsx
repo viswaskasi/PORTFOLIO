@@ -229,7 +229,7 @@ function App() {
 
       {/* ── MAIN PORTFOLIO CONTENT ── */}
       <div className="relative z-10 lg:pl-64 flex flex-col min-h-screen">
-        <div className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 lg:pt-16 pb-12 lg:pb-16">
+        <div className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-20 sm:pt-24 lg:pt-16 pb-4 md:pb-6">
           <main className="w-full space-y-12 md:space-y-20">
             
             <div className="reveal-on-scroll">
